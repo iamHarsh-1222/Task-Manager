@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — TaskFlow</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="app-page">
+  <nav class="navbar">
+    <div class="nav-brand">⚡ TaskFlow</div>
+    <div class="nav-right">
+      <span id="userBadge" class="user-badge"></span>
+      <button onclick="logout()" class="btn-logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item active">📊 Dashboard</a>
+        <a href="#" onclick="showMyTasks()" class="nav-item">✅ My Tasks</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <!-- STATS -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-num" id="statProjects">0</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-num" id="statTasks">0</div>
+          <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-card warning">
+          <div class="stat-num" id="statOverdue">0</div>
+          <div class="stat-label">Overdue</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-num" id="statDone">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+      </div>
+
+      <!-- PROJECTS SECTION -->
+      <div class="section-header">
+        <h2>Projects</h2>
+        <button id="newProjectBtn" class="btn-primary hidden" onclick="openProjectModal()">+ New Project</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <div class="loading">Loading projects...</div>
+      </div>
+
+      <!-- MY TASKS SECTION -->
+      <div id="myTasksSection" class="hidden">
+        <div class="section-header"><h2>My Tasks</h2></div>
+        <div id="myTasksList" class="tasks-list"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- NEW PROJECT MODAL -->
+  <div id="projectModal" class="modal hidden">
+    <div class="modal-box">
+      <h3>Create New Project</h3>
+      <form onsubmit="createProject(event)">
+        <div class="form-group">
+          <label>Project Name</label>
+          <input type="text" id="projName" required placeholder="e.g. Website Redesign"/>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="projDesc" placeholder="What is this project about?"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Add Members</label>
+          <div id="membersList" class="members-checklist"></div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" onclick="closeModal('projectModal')" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Create →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
